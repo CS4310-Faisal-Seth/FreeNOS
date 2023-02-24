@@ -257,10 +257,10 @@
 #define VERSION_SUFFIX ""
 #define VERSION "1.0.3"
 #define VERSIONCODE 65539
-#define RELEASE "1.0.3-git(3e999f0)*"
+#define RELEASE "1.0.3-git(3c3f6eb)*"
 #define FREENOS 1
 #define COMPILER_VERSION "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0"
-#define BUILDUSER "seth"
+#define BUILDUSER "root"
 #define BUILDHOST "seth-VirtualBox"
 #define BUILDOS "Linux 5.15.0-60-generic"
 #define BUILDARCH "x86_64"
