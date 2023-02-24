@@ -257,17 +257,17 @@
 #define VERSION_SUFFIX ""
 #define VERSION "1.0.3"
 #define VERSIONCODE 65539
-#define RELEASE "1.0.3-git(db27dbbc)"
+#define RELEASE "1.0.3-git(3e999f0)*"
 #define FREENOS 1
 #define COMPILER_VERSION "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0"
-#define BUILDUSER "root"
+#define BUILDUSER "seth"
 #define BUILDHOST "seth-VirtualBox"
 #define BUILDOS "Linux 5.15.0-60-generic"
 #define BUILDARCH "x86_64"
 #define BUILDPY "Python 3.8.10"
 #define BUILDER "SCons 3.1.2"
-#define BUILDURL "/home/seth/Desktop/FreeNOS"
-#define BUILDPATH "/home/seth/Desktop/FreeNOS"
-#define TESTROOT "/home/seth/Desktop/FreeNOS/build/host"
+#define BUILDURL "/home/seth/FreeNOS"
+#define BUILDPATH "/home/seth/FreeNOS"
+#define TESTROOT "/home/seth/FreeNOS/build/host"
 #endif
 
