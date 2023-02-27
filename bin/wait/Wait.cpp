@@ -21,7 +21,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include "Wait.h"
-#include "lib/libposix/sys/wait.h"
+#include <sys/wait.h>
 
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
