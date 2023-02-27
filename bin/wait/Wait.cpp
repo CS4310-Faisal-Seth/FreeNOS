@@ -21,6 +21,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include "Wait.h"
+#include "wait.h"
 
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
@@ -37,7 +38,26 @@ Wait::Result Wait::exec()
 {
     //This is all of the sleep specific information that we will need to change
     //I am leaving it here as frame of reference
-    
+
+    int pid = 0;
+
+        // Convert input to pid (using seconds like sleep)
+        if ((pid = atoi(arguments().get("PID"))) <= 0)
+        {
+            ERROR("invalid wait pid `" << arguments().get("SECONDS") << "'");
+            return InvalidArgument;
+        }
+
+        int status;
+        if (waitpid(pid, &status, 0) == -1)
+        {
+            ERROR("failed to wait: " << strerror(errno));
+            return IOError;
+        }
+
+        // Done
+        return Success;
+
     /*
     int sec = 0;
 
