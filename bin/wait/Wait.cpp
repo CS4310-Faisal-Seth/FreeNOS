@@ -25,8 +25,8 @@
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
-    parser().setDescription("Stop executing for some time");
-    parser().registerPositional("SECONDS", "Stop executing for the given number of seconds");
+    parser().setDescription("Stop executing until the specified process finished");
+    parser().registerPositional("PID", "Stop executing until the process with this ID finished executing");
 }
 
 Wait::~Wait()
@@ -35,6 +35,10 @@ Wait::~Wait()
 
 Wait::Result Wait::exec()
 {
+    //This is all of the sleep specific information that we will need to change
+    //I am leaving it here as frame of reference
+    
+    /*
     int sec = 0;
 
     // Convert input to seconds
@@ -50,6 +54,7 @@ Wait::Result Wait::exec()
         ERROR("failed to sleep: " << strerror(errno));
         return IOError;
     }
+    */
 
     // Done
     return Success;
