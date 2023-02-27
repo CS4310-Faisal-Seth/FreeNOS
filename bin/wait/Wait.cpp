@@ -36,8 +36,6 @@ Wait::~Wait()
 
 Wait::Result Wait::exec()
 {
-    //This is all of the sleep specific information that we will need to change
-    //I am leaving it here as frame of reference
 
     int pid = 0;
 
@@ -58,23 +56,7 @@ Wait::Result Wait::exec()
         // Done
         return Success;
 
-    /*
-    int sec = 0;
-
-    // Convert input to seconds
-    if ((sec = atoi(arguments().get("SECONDS"))) <= 0)
-    {
-        ERROR("invalid wait time `" << arguments().get("SECONDS") << "'");
-        return InvalidArgument;
-    }
-
-    // Sleep now
-    if (wait(sec) != 0)
-    {
-        ERROR("failed to sleep: " << strerror(errno));
-        return IOError;
-    }
-    */
+    
 
     // Done
     return Success;
