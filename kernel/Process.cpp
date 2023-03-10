@@ -36,6 +36,7 @@ Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &
     m_memoryContext = ZERO;
     m_kernelChannel = ZERO;
     MemoryBlock::set(&m_sleepTimer, 0, sizeof(m_sleepTimer));
+    //Add priority into here as well
 }
 
 Process::~Process()

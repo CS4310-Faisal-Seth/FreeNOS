@@ -58,6 +58,7 @@ class Process
         MemoryMapError,
         OutOfMemory,
         WakeupPending
+        //Priority goes here
     };
 
     /**
@@ -81,6 +82,8 @@ class Process
      * @param privileged If true, the process has unlimited access to hardware.
      * @param map Memory map to use
      */
+
+     //Add a priority here
     Process(ProcessID id, Address entry, bool privileged, const MemoryMap &map);
 
     /**
