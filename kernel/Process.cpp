@@ -29,6 +29,7 @@ Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &
     m_state         = Stopped;
     m_parent        = 0;
     m_waitId        = 0;
+    m_priority      = 0;
     m_waitResult    = 0;
     m_wakeups       = 0;
     m_entry         = entry;
@@ -37,6 +38,7 @@ Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &
     m_kernelChannel = ZERO;
     MemoryBlock::set(&m_sleepTimer, 0, sizeof(m_sleepTimer));
     //Add priority into here as well
+
 }
 
 Process::~Process()
@@ -71,6 +73,11 @@ ProcessID Process::getParent() const
 ProcessID Process::getWait() const
 {
     return m_waitId;
+}
+
+ProcessID Process::getPriority() const
+{
+    return m_priority;
 }
 
 uint Process::getWaitResult() const

@@ -111,6 +111,11 @@ class Process
     ProcessID getWait() const;
 
     /**
+     * Get priority.
+     */
+    ProcessID getPriority() const;
+
+    /**
      * Get wait result
      */
     uint getWaitResult() const;
