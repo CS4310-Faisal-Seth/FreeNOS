@@ -39,7 +39,7 @@ ProcessList::Result ProcessList::exec()
     // Print header
     out << "ID  Priority  PARENT  USER GROUP STATUS     CMD\r\n";
 
-    Boolean priority = false;
+
     //parser().addFlag(priority, 'l', "priority", "prints the level of priority");
 
 

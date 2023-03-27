@@ -29,6 +29,11 @@ ProcessID ProcessClient::getProcessID() const
     return m_pid;
 }
 
+ProcessID ProcessClient::getPriority() const
+{
+    return m_priority;
+}
+
 ProcessID ProcessClient::getParentID() const
 {
     return m_parent;

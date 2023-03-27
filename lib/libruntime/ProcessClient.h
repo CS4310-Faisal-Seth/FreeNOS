@@ -79,6 +79,13 @@ class ProcessClient
     ProcessID getProcessID() const;
 
     /**
+         * Get current process identifier
+         *
+         * @return Current Process ID
+         */
+    ProcessID getPriority() const;
+
+    /**
      * Get parent process identifier
      *
      * @return Parent Process ID
