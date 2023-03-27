@@ -29,7 +29,7 @@ Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &
     m_state         = Stopped;
     m_parent        = 0;
     m_waitId        = 0;
-    m_priority      = 0;
+    m_priority      = 3;    //pretty sure this stays here
     m_waitResult    = 0;
     m_wakeups       = 0;
     m_entry         = entry;

@@ -15,6 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//process Ctrl kernel API
+//process Client lib libruntime
+
 #include <Types.h>
 #include <Macros.h>
 #include <stdio.h>
@@ -34,38 +37,40 @@ ProcessList::Result ProcessList::exec()
     String out;
 
     // Print header
-    out << "ID  PARENT  USER GROUP STATUS     CMD\r\n";
+    out << "ID  Priority  PARENT  USER GROUP STATUS     CMD\r\n";
 
     Boolean priority = false;
-    parser().addFlag(priority, 'l', "priority", "prints the level of priority");
+    //parser().addFlag(priority, 'l', "priority", "prints the level of priority");
 
 
     // Loop processes
+                                    //Using process client to find the number of processes
     for (ProcessID pid = 0; pid < ProcessClient::MaximumProcesses; pid++)
     {
         ProcessClient::Info info;
-
+                                                //process is a process client
         const ProcessClient::Result result = process.processInfo(pid, info);
         if (result == ProcessClient::Success)
         {
+            //info is a struct in process client
             DEBUG("PID " << pid << " state = " << *info.textState);
 
             // Output a line
             char line[128];
-            if(priority == false){
+            //if(priority == false){
                 snprintf(line, sizeof(line),
-                                    "%3d %7d %4d %5d %10s %32s\r\n",
-                                     pid, info.kernelState.parent,
-                                     0, 0, *info.textState, *info.command);
+                                    "%3d %3d %7d %4d %5d %10s %32s\r\n",
+                                     pid, info.kernelState.priority, info.kernelState.parent,
+                                     0, 0, *info.textState, *info.command); //add one more for priority
                             out << line;
-            }
-            else{
+            //}
+            /*else{
                 snprintf(line, sizeof(line),
                                     "%3d %7d %4d %5d %10s %32s %3d\r\n",
                                      pid, info.kernelState.parent,
                                      0, 0, *info.textState, *info.command, info.kernelState.priority);
                             out << line;
-            }
+            }*/
 
         }
     }

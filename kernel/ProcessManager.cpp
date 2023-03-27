@@ -152,6 +152,7 @@ void ProcessManager::remove(Process *proc, const uint exitStatus)
     delete proc;
 }
 
+//scheduling shit
 ProcessManager::Result ProcessManager::schedule()
 {
     const Timer *timer = Kernel::instance()->getTimer();

@@ -48,6 +48,7 @@ ProcessClient::Result ProcessClient::processInfo(const ProcessID pid,
     const Memory::Range range = map.range(MemoryMap::UserArgs);
     char cmd[128];
 
+    //This next line is important
     const API::Result result = ProcessCtl(pid, InfoPID, (Address) &info.kernelState);
     switch (result)
     {

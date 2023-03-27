@@ -90,6 +90,8 @@ Log & operator << (Log &log, ProcessOperation op);
  *         of this return value on success. For Spawn, the new PID is stored in
  *         the upper 16-bits.
  */
+
+ //This is being called from the client, this is doing stuff in kernel
 inline API::Result ProcessCtl(const ProcessID proc,
                               const ProcessOperation op,
                               const Address addr = 0,

@@ -66,6 +66,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
     return InvalidArgument;
 }
 
+//Major part to the second part
 Process * Scheduler::select()
 {
     if (m_queue.count() > 0)

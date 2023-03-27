@@ -41,7 +41,7 @@ API::Result ProcessCtlHandler(const ProcessID procID,
     if(action != GetPID && action != Spawn)
     {
         if (procID == SELF)
-            proc = procs->current();
+            proc = procs->current();    //current process
         else if (!(proc = procs->get(procID)))
             return API::NotFound;
     }
@@ -131,10 +131,12 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         Kernel::instance()->sendIRQ(addr >> 16, addr & 0xffff);
         break;
 
+//this is important as well
     case InfoPID:
         info->id    = proc->getID();
         info->state = proc->getState();
         info->parent = proc->getParent();
+        //add a section for priority
         break;
 
     case WaitPID:
