@@ -67,8 +67,8 @@ API::Result ProcessCtlHandler(const ProcessID procID,
     case GetPID:
         return (API::Result) procs->current()->getID();
 
-    case GetPriority:
-            return (API::Result) procs->current()->getPriority();
+    //case GetPriority:
+      //      return (API::Result) procs->current()->getPriority();
 
     case GetParent:
         return (API::Result) procs->current()->getParent();
