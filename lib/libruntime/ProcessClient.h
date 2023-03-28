@@ -133,6 +133,9 @@ class ProcessClient
     /** Our own process identifier */
     static const ProcessID m_pid;
 
+    /** Our own process priority */
+    static const ProcessID m_priority;
+
     /** Our parent process identifier */
     static const ProcessID m_parent;
 };
