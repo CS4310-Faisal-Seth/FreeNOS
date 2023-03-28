@@ -113,7 +113,7 @@ class Process
     /**
      * Get priority.
      */
-    ProcessID getPriority() const;
+    int getPriority() const;
 
     /**
      * Get wait result
@@ -253,6 +253,9 @@ class Process
 
     /** Process Identifier */
     const ProcessID m_id;
+
+    /** Process priority */
+    ProcessID m_priority;
 
     /** Parent process */
     ProcessID m_parent;

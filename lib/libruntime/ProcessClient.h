@@ -83,7 +83,7 @@ class ProcessClient
          *
          * @return Current Process ID
          */
-    ProcessID getPriority() const;
+    int getPriority() const;
 
     /**
      * Get parent process identifier
@@ -134,7 +134,7 @@ class ProcessClient
     static const ProcessID m_pid;
 
     /** Our own process priority */
-    static const ProcessID m_priority;
+    static const int m_priority;
 
     /** Our parent process identifier */
     static const ProcessID m_parent;
