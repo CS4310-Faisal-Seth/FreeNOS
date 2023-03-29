@@ -26,41 +26,40 @@ Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Output system process list");
+    parser().registerPositional("PRIORITY", "designated seconds to stop for");
 }
 
 Renice::Result Renice::exec()
 {
-
+     const ProcessClient process;
     //All of this is getting changed
+    int newpriority = 0;
 
+    newpriority = atoi(arguments().get("PRIORITY"));
 
-    const ProcessClient process;
-    String out;
-
-    // Print header
-    out << "ID  PARENT  USER GROUP STATUS     CMD\r\n";
-
-    // Loop processes
-    for (ProcessID pid = 0; pid < ProcessClient::MaximumProcesses; pid++)
-    {
-        ProcessClient::Info info;
-
-        const ProcessClient::Result result = process.processInfo(pid, info);
-        if (result == ProcessClient::Success)
-        {
-            DEBUG("PID " << pid << " state = " << *info.textState);
-
-            // Output a line
-            char line[128];
-            snprintf(line, sizeof(line),
-                    "%3d %7d %4d %5d %10s %32s\r\n",
-                     pid, info.kernelState.parent,
-                     0, 0, *info.textState, *info.command);
-            out << line;
-        }
+    //input validation
+    if(newpriority < 1 || newpriority > 5){
+        ERROR("invalid priority `" << arguments().get("PRIORITY") << "'");
+        return InvalidArgument;
     }
 
-    // Output the table
-    write(1, *out, out.length());
+
+    //now the actual implementation
+    //ProcessClient::Info info;
+
+    const API::Result result = ProcessCtl(pid, Renice, newpriority);
+    /*if (result == ProcessClient::Success)
+    {
+
+    }else{
+        ERROR("PID does not exisit");
+        return InvalidArgument;
+    }*/
+
+    //WTF is this
+
+
+
+
     return Success;
 }

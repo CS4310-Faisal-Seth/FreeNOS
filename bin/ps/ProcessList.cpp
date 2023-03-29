@@ -57,20 +57,13 @@ ProcessList::Result ProcessList::exec()
 
             // Output a line
             char line[128];
-            //if(priority == false){
+
                 snprintf(line, sizeof(line),
-                                    "%3d %3d %7d %4d %5d %10s %32s\r\n",
+                                    "%3d %7d %7d %4d %5d %10s %32s\r\n",
                                      pid, info.kernelState.priority, info.kernelState.parent,
                                      0, 0, *info.textState, *info.command); //add one more for priority
                             out << line;
-            //}
-            /*else{
-                snprintf(line, sizeof(line),
-                                    "%3d %7d %4d %5d %10s %32s %3d\r\n",
-                                     pid, info.kernelState.parent,
-                                     0, 0, *info.textState, *info.command, info.kernelState.priority);
-                            out << line;
-            }*/
+
 
         }
     }

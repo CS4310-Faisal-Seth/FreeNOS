@@ -70,6 +70,10 @@ int Process::getPriority() const
     return m_priority;
 }
 
+void Process::setPriority(int newPriority) {
+    m_priority = newPriority;
+}
+
 ProcessID Process::getParent() const
 {
     return m_parent;

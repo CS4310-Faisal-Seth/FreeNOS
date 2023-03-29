@@ -142,6 +142,9 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         info->priority = proc->getPriority();
         break;
 
+    case Renice:
+        proc -> changePriority(addr);
+
     case WaitPID:
         if (procs->wait(proc) != ProcessManager::Success)
         {
@@ -194,11 +197,13 @@ Log & operator << (Log &log, ProcessOperation op)
         case Spawn:     log.append("Spawn"); break;
         case KillPID:   log.append("KillPID"); break;
         case GetPID:    log.append("GetPID"); break;
+        case GetPriority:log.append("GetPriority"); break;
         case GetParent: log.append("GetParent"); break;
         case WatchIRQ:  log.append("WatchIRQ"); break;
         case EnableIRQ: log.append("EnableIRQ"); break;
         case DisableIRQ:log.append("DisableIRQ"); break;
         case InfoPID:   log.append("InfoPID"); break;
+        case Renice:    log.append("Renice"); break;
         case WaitPID:   log.append("WaitPID"); break;
         case InfoTimer: log.append("InfoTimer"); break;
         case EnterSleep: log.append("EnterSleep"); break;
