@@ -55,43 +55,37 @@ Renice::Result Renice::exec()
 
     //now the actual implementation
 
-     const ProcessClient process;
+     //He says we should follow how ps is structured
 
-     ProcessClient::Info info;
-                                                     //process is a process client
-     //const ProcessClient::Result result = process.processInfo(pid, info);
+     //ps code below
+        /*
+            const ProcessClient process;
 
-     const Arch::MemoryMap map;
-     const Memory::Range range = map.range(MemoryMap::UserArgs);
-     char cmd[128];
+            // Loop processes
+                                            //Using process client to find the number of processes
+            for (ProcessID pid = 0; pid < ProcessClient::MaximumProcesses; pid++)
+            {
+                ProcessClient::Info info;
+                                                        //process is a process client
+                const ProcessClient::Result result = process.processInfo(pid, info);
+                if (result == ProcessClient::Success)
+                {
+                    //info is a struct in process client
+                    //prints stuff from info and info.kernelstate
+                }
+            }
+        */
 
+    /*process.processInfo makes sure that the process exisits then runs process CTL on it
+        it uses this ProcessCtl(pid, InfoPID, (Address) &info.kernelState);, but process CTL takes in
+          ProcessCtlHandler(const ProcessID procID, const ProcessOperation action, const Address addr, const Address output)
+        I think addr and output are initialized as 0 through a weird code loop?
+    processctl then does a bunch of stuff I dont understand, but is able to call the processes functions.
+        I think we have two options
+            1. Figure out how process ctl works to bypass going through all these classes and access the process
+            2. call process ctl and add an increment and decrement action to ctl, then loop that by the difference between the new priority and current priority
 
-     //const API::Result result = ProcessCtl(pid, InfoPID, (Address) &info.kernelState);
-     //const ProcessID procID,
-                                         //const ProcessOperation action,
-                                         //const Address addr,
-                                         //const Address output)
-     Process *proc = ZERO;
-     ProcessInfo *info = (ProcessInfo *) (address);
-     ProcessManager *procs = Kernel::instance()->getProcessManager();
-     Timer *timer;
-
-     DEBUG("#" << procs->current()->getID() << " " << action << " -> " << PID << " (" << (address) << ")");
-
-     // Does the target process exist?
-     if(action != GetPID && action != Spawn)
-     {
-         if (PID == SELF)
-             proc = procs->current();    //current process
-         else if (!(proc = procs->get(PID)))
-             return InvalidArgument;
-     }
-     proc -> changePriority(newpriority);
-
-
-
-
-
+    */
 
     return Success;
 }
