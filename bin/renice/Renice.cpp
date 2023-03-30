@@ -15,6 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+
+
 #include <Types.h>
 #include <Macros.h>
 #include <stdio.h>
@@ -26,15 +32,18 @@ Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Output system process list");
+    parser().registerPositional("PID", "designated seconds to stop for");
     parser().registerPositional("PRIORITY", "designated seconds to stop for");
 }
 
 Renice::Result Renice::exec()
 {
-     const ProcessClient process;
+     //const ProcessClient process;
     //All of this is getting changed
+    int PID = 0;
     int newpriority = 0;
 
+    PID = atoi(arguments().get("PRIORITY"));
     newpriority = atoi(arguments().get("PRIORITY"));
 
     //input validation
@@ -45,18 +54,41 @@ Renice::Result Renice::exec()
 
 
     //now the actual implementation
-    //ProcessClient::Info info;
 
-    const API::Result result = ProcessCtl(pid, Renice, newpriority);
-    /*if (result == ProcessClient::Success)
-    {
+     const ProcessClient process;
 
-    }else{
-        ERROR("PID does not exisit");
-        return InvalidArgument;
-    }*/
+     ProcessClient::Info info;
+                                                     //process is a process client
+     //const ProcessClient::Result result = process.processInfo(pid, info);
 
-    //WTF is this
+     const Arch::MemoryMap map;
+     const Memory::Range range = map.range(MemoryMap::UserArgs);
+     char cmd[128];
+
+
+     //const API::Result result = ProcessCtl(pid, InfoPID, (Address) &info.kernelState);
+     //const ProcessID procID,
+                                         //const ProcessOperation action,
+                                         //const Address addr,
+                                         //const Address output)
+     Process *proc = ZERO;
+     ProcessInfo *info = (ProcessInfo *) (address);
+     ProcessManager *procs = Kernel::instance()->getProcessManager();
+     Timer *timer;
+
+     DEBUG("#" << procs->current()->getID() << " " << action << " -> " << PID << " (" << (address) << ")");
+
+     // Does the target process exist?
+     if(action != GetPID && action != Spawn)
+     {
+         if (PID == SELF)
+             proc = procs->current();    //current process
+         else if (!(proc = procs->get(PID)))
+             return InvalidArgument;
+     }
+     proc -> changePriority(newpriority);
+
+
 
 
 
