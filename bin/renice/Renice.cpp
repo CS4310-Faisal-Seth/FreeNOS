@@ -63,6 +63,8 @@ Renice::Result Renice::exec()
 
     ProcessID procID = PID;
 
+    Kernel k = Kernel::instance();
+
     // Does the target process exist?
     const Arch::MemoryMap map;
     Process *proc = ZERO;
