@@ -26,6 +26,7 @@
 #include <FreeNOS/Process.h>
 #include <FreeNOS/ProcessEvent.h>
 #include <FreeNOS/ProcessManager.h>
+#include <Log.h>
 
 #include <Types.h>
 #include <Macros.h>
