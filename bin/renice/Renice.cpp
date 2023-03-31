@@ -20,6 +20,7 @@
 #include <string.h>
 #include <errno.h>
 
+#include <FreeNOS/Kernel.h>
 
 #include <Types.h>
 #include <Macros.h>
@@ -62,8 +63,11 @@ Renice::Result Renice::exec()
 
     if (procID == SELF)
         proc = procs->current();    //current process
-    else if (!(proc = procs->get(procID)))
-        return API::NotFound;
+    else if (!(proc = procs->get(procID))){
+        ERROR("Couldnt find process");
+        return InvalidArgument;
+    }
+
     else    {
         proc = procs->get(procID);
     }
