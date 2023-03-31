@@ -70,7 +70,7 @@ int Process::getPriority() const
     return m_priority;
 }
 
-void Process::increasePriority() const{
+void Process::increasePriority(){
     m_priority++;
 }
 
