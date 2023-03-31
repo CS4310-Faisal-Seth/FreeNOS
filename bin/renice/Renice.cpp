@@ -52,7 +52,7 @@ Renice::Result Renice::exec()
     int PID = 0;
     int newpriority = 0;
 
-    PID = atoi(arguments().get("PRIORITY"));
+    PID = atoi(arguments().get("PID"));
     newpriority = atoi(arguments().get("PRIORITY"));
 
     //input validation
@@ -63,13 +63,13 @@ Renice::Result Renice::exec()
 
     //Make sure that the process exisits
 
-    ProcessID procID = PID;
+    //ProcessID procID = PID;
 
     const ProcessClient process;
 
     ProcessClient::Info info;
 
-    const API::Result result = ProcessCtl(procID, IncreasePriority, (Address) &info.kernelState);
+    const API::Result result = ProcessCtl(PID, ChangePriority, (Address) &info.kernelState, newpriority);
 
 /*
     Kernel k = Kernel::instance();
