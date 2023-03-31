@@ -20,7 +20,12 @@
 #include <string.h>
 #include <errno.h>
 
+#include <FreeNOS/System.h>
 #include <FreeNOS/Kernel.h>
+#include <FreeNOS/Config.h>
+#include <FreeNOS/Process.h>
+#include <FreeNOS/ProcessEvent.h>
+#include <FreeNOS/ProcessManager.h>
 
 #include <Types.h>
 #include <Macros.h>
