@@ -33,7 +33,8 @@
 #include <Macros.h>
 #include <stdio.h>
 #include <unistd.h>
-//#include <FreeNOS/ProcessClient.h>
+#include <ProcessClient.h>
+
 #include "Renice.h"
 
 Renice::Renice(int argc, char **argv)
