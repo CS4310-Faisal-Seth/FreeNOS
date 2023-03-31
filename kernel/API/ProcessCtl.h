@@ -45,6 +45,7 @@ typedef enum ProcessOperation
     DisableIRQ,
     SendIRQ,
     InfoPID,
+    IncreasePriority,
     WaitPID,
     InfoTimer,
     WaitTimer,
