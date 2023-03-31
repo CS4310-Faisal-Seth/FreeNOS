@@ -27,13 +27,13 @@
 #include <FreeNOS/ProcessEvent.h>
 #include <FreeNOS/ProcessManager.h>
 #include <Log.h>
-#include <FreeNOS/ProcessCtl.h>
+#include <Types.h>
 
 #include <Types.h>
 #include <Macros.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <ProcessClient.h>
+#include <FreeNOS/ProcessClient.h>
 #include "Renice.h"
 
 Renice::Renice(int argc, char **argv)
