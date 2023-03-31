@@ -66,9 +66,9 @@ Renice::Result Renice::exec()
     // Does the target process exist?
     const Arch::MemoryMap map;
     Process *proc = ZERO;
-    ProcessInfo *info = (ProcessInfo *) addr;
+    //ProcessInfo *info = (ProcessInfo *) addr;
     ProcessManager *procs = Kernel::instance()->getProcessManager();
-    Timer *timer;
+    //Timer *timer;
 
     if (procID == SELF)
         proc = procs->current();    //current process
