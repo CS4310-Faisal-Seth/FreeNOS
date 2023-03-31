@@ -70,6 +70,10 @@ int Process::getPriority() const
     return m_priority;
 }
 
+void Process::increasePriority() const{
+    m_priority++;
+}
+
 void Process::setPriority(int newPriority) {
     m_priority = newPriority;
 }

@@ -115,6 +115,8 @@ class Process
      */
     int getPriority() const;
 
+    void increasePriority() const;
+
     void setPriority(int newPriority);
 
     /**

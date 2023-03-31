@@ -142,8 +142,8 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         info->priority = proc->getPriority();
         break;
 
-    case Renice:
-        proc -> changePriority(addr);
+    case IncreasePriority:
+        proc -> increasePriority();
 
     case WaitPID:
         if (procs->wait(proc) != ProcessManager::Success)

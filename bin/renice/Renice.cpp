@@ -27,6 +27,7 @@
 #include <FreeNOS/ProcessEvent.h>
 #include <FreeNOS/ProcessManager.h>
 #include <Log.h>
+#include <FreeNOS/ProcessCtl.h>
 
 #include <Types.h>
 #include <Macros.h>
@@ -63,6 +64,13 @@ Renice::Result Renice::exec()
 
     ProcessID procID = PID;
 
+    const ProcessClient process;
+
+    ProcessClient::Info info;
+
+    const API::Result result = ProcessCtl(procID, IncreasePriority, (Address) &info.kernelState);
+
+/*
     Kernel k = Kernel::instance();
 
     // Does the target process exist?
@@ -85,7 +93,7 @@ Renice::Result Renice::exec()
 
     proc->setPriority(newpriority);
 
-
+*/
     //Call the process's setPriority(newpriority)
 
 
