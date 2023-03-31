@@ -29,6 +29,7 @@ ProcessList::ProcessList(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Output system process list");
+    parser().registerPositional("Priorities", "List only priority levels");
 }
 
 ProcessList::Result ProcessList::exec()
@@ -58,11 +59,15 @@ ProcessList::Result ProcessList::exec()
             // Output a line
             char line[128];
 
+                //if flag
+                    //print partial
+                //else do full
+
                 snprintf(line, sizeof(line),
-                                    "%3d %7d %7d %4d %5d %10s %32s\r\n",
-                                     pid, info.kernelState.priority, info.kernelState.parent,
-                                     0, 0, *info.textState, *info.command); //add one more for priority
-                            out << line;
+                "%3d %7d %7d %4d %5d %10s %32s\r\n",
+                 pid, info.kernelState.priority, info.kernelState.parent,
+                 0, 0, *info.textState, *info.command); //add one more for priority
+                out << line;
 
 
         }

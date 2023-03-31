@@ -37,12 +37,15 @@
 
 #include "Renice.h"
 
+'&'
+
 Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Output system process list");
-    parser().registerPositional("PID", "process we want to change");
+
     parser().registerPositional("PRIORITY", "priority we want to set to");
+    parser().registerPositional("PID", "process we want to change");
 }
 
 Renice::Result Renice::exec()
