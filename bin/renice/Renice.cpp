@@ -32,8 +32,8 @@ Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Output system process list");
-    parser().registerPositional("PID", "designated seconds to stop for");
-    parser().registerPositional("PRIORITY", "designated seconds to stop for");
+    parser().registerPositional("PID", "process we want to change");
+    parser().registerPositional("PRIORITY", "priority we want to set to");
 }
 
 Renice::Result Renice::exec()
@@ -51,6 +51,28 @@ Renice::Result Renice::exec()
         ERROR("invalid priority `" << arguments().get("PRIORITY") << "'");
         return InvalidArgument;
     }
+
+    //Make sure that the process exisits
+
+    ProcessID procID = PID;
+
+    // Does the target process exist?
+    Process *proc = ZERO;
+    ProcessManager *procs = Kernel::instance()->getProcessManager();
+
+    if (procID == SELF)
+        proc = procs->current();    //current process
+    else if (!(proc = procs->get(procID)))
+        return API::NotFound;
+    else    {
+        proc = procs->get(procID);
+    }
+
+    proc->setPriority(newpriority);
+
+
+    //Call the process's setPriority(newpriority)
+
 
 
     //now the actual implementation
