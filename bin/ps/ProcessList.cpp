@@ -28,7 +28,8 @@
 ProcessList::ProcessList(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
-    parser().registerOption("-l", "--priority", "Output priorities");
+    parser().registerFlag('l', "priority", "Print out priorities");
+    //parser().registerOption("-l", "--priority", "Output priorities");
     parser().setDescription("Output system process list");
     //parser().registerPositional("Priorities", "List only priority levels");
 }
@@ -39,7 +40,7 @@ ProcessList::Result ProcessList::exec()
     String out;
 
     // Print header
-    if (parser().optionExists("-l")){
+    if (priority){
         out << "ID  Priority  PARENT  USER GROUP STATUS     CMD\r\n";
     } else {
         out << "ID  PARENT  USER GROUP STATUS     CMD\r\n";
@@ -65,7 +66,7 @@ ProcessList::Result ProcessList::exec()
             // Output a line
             char line[128];
 
-                if (parser().optionExists("-l")){
+                if (priority){
                     snprintf(line, sizeof(line),
                                     "%3d %7d %7d %4d %5d %10s %32s\r\n",
                                      pid, info.kernelState.priority, info.kernelState.parent,
