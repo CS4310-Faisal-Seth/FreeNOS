@@ -39,8 +39,10 @@ ProcessList::Result ProcessList::exec()
     const ProcessClient process;
     String out;
 
+
+    const char *priority = arguments().get("priority");
     // Print header
-    if (priority){
+    if (priority != NULL){
         out << "ID  Priority  PARENT  USER GROUP STATUS     CMD\r\n";
     } else {
         out << "ID  PARENT  USER GROUP STATUS     CMD\r\n";
@@ -66,7 +68,7 @@ ProcessList::Result ProcessList::exec()
             // Output a line
             char line[128];
 
-                if (priority){
+                if (priority != NULL){
                     snprintf(line, sizeof(line),
                                     "%3d %7d %7d %4d %5d %10s %32s\r\n",
                                      pid, info.kernelState.priority, info.kernelState.parent,
