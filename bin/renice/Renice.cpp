@@ -37,8 +37,6 @@
 
 #include "Renice.h"
 
-'&'
-
 Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
