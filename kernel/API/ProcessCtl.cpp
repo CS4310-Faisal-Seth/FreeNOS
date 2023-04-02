@@ -45,6 +45,9 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         else if (!(proc = procs->get(procID)))
             return API::NotFound;
     }
+
+    int oldPriority = proc->getPriority();
+
     // Handle request
     switch (action)
     {
@@ -147,7 +150,6 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         break;
 
     case ChangePriority:
-        int oldPriority = proc->getPriority();
         proc->setPriority(output);
         procs->syncQueues(proc, oldPriority);
         procs->schedule();
