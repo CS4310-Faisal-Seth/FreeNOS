@@ -143,7 +143,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 
     }
 
-    FATAL("process ID " << proc->getID() << " is not in the schedule, its current priority is " << proc->getPriority() <<);
+    FATAL("process ID " << proc->getID() << " is not in the schedule, its current priority is " << proc->getPriority());
     return InvalidArgument;
 }
 
