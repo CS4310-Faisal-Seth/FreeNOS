@@ -156,7 +156,7 @@ ProcessManager::Result ProcessManager::syncQueues(Process *proc, int oldPriority
 
    Scheduler::Result res =  m_scheduler->syncQueues(proc, oldPriority);
    if (res == Scheduler::InvalidArgument) {
-        FATAL("failed to sync queues after changing proc prio to " << proc->getPriority);
+        FATAL("failed to sync queues after changing proc priority");
         return ProcessManager::InvalidArgument;
    } else {
         return ProcessManager::Success;
