@@ -152,8 +152,13 @@ void ProcessManager::remove(Process *proc, const uint exitStatus)
     delete proc;
 }
 
-Scheduler::Result ProcessManager::syncQueues(Process *proc, int oldPriority) {
-   return m_scheduler->syncQueues(proc, oldPriority);
+ProcessManager::Result syncQueues(Process *proc, int oldPriority) {
+   Scheduler::Result res =  m_scheduler->syncQueues(proc, oldPriority);
+   if (res == InvalidArgument) {
+        return InvalidArgument;
+   } else {
+        return Success;
+   }
 }
 
 //scheduling shit

@@ -209,7 +209,7 @@ class ProcessManager
      */
     Process * current();
 
-    Scheduler::Result syncQueues(Process *proc, int oldPriority);
+    Result syncQueues(Process *proc, int oldPriority);
 
   private:
 
