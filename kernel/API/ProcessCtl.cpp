@@ -155,11 +155,7 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         proc->setPriority(output);
         info->priority = output;
 
-        ProcessManager::Result result = procs->syncQueues(proc, oldPriority);
-        if (result != ProcessManager::Success)
-        {
-           FATAL("failed to sync queues after changing proc prio to " << proc->getPriority);
-        }
+        procs->syncQueues(proc, oldPriority);
         procs->schedule();
         break;
 
