@@ -148,6 +148,7 @@ API::Result ProcessCtlHandler(const ProcessID procID,
 
     case ChangePriority:
         proc->setPriority(output);
+        m_procs->schedule();
         break;
 
     case WaitPID:
