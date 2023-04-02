@@ -62,7 +62,6 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
 
      // At this point, old priority should be set
      if (oldPriority == 0) {
-        FATAL("Old priority has not been updated);
         return InvalidArgument;
      }
 
