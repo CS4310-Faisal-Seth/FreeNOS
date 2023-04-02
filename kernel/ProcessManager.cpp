@@ -153,11 +153,11 @@ void ProcessManager::remove(Process *proc, const uint exitStatus)
 }
 
 ProcessManager::Result syncQueues(Process *proc, int oldPriority) {
-   Scheduler::Result res =  m_scheduler->syncQueues(proc, oldPriority);
-   if (res == InvalidArgument) {
-        return InvalidArgument;
+   const Scheduler::Result res =  m_scheduler->syncQueues(proc, oldPriority);
+   if (res == Scheduler::InvalidArgument) {
+        return ProcessManager::InvalidArgument;
    } else {
-        return Success;
+        return ProcessManager::Success;
    }
 }
 
