@@ -21,6 +21,9 @@
 #include "Scheduler.h"
 #include "ProcessEvent.h"
 #include "ProcessManager.h"
+#include <iostream>
+
+using namespace std;
 
 ProcessManager::ProcessManager()
     : m_procs()
@@ -153,7 +156,8 @@ void ProcessManager::remove(Process *proc, const uint exitStatus)
 }
 
 void ProcessManager::syncQueues(Process *proc, int oldPriority) {
-   m_scheduler->syncQueues(proc, oldPriority);
+    cout << "Cool shit";
+   //m_scheduler->syncQueues(proc, oldPriority);
 }
 
 //scheduling shit
