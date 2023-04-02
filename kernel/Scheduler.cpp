@@ -129,7 +129,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
      }
 
      // Proc has its new priority, so enqueue will add appropriately
-     return this->enqueue(foundProc, true);
+     return this->enqueue(proc, true);
 }
 
 Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
