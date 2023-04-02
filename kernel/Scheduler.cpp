@@ -56,7 +56,7 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
 }
 
 // At this point, assume proc has new priority
-Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority, int newPriority) {
+Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
 
     Process *foundProc;
 
@@ -129,7 +129,6 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority, int newP
      }
 
      // Proc has its new priority, so enqueue will add appropriately
-     foundProc->setPriority(newPriority);
      return this->enqueue(foundProc, true);
 }
 
