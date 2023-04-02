@@ -60,6 +60,12 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
 
     Process *foundProc;
 
+     // At this point, old priority should be set 
+     if (oldPriority == 0) {
+        ERROR("Old priority has not been updated);
+        return InvalidArgument;
+     }
+
     if (oldPriority == 1) {
        Size count = m_queue1.count();
 
