@@ -147,7 +147,9 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         break;
 
     case ChangePriority:
+        int oldPriority = proc->getPriority();
         proc->setPriority(output);
+        procs->syncQueues(proc, oldPriority);
         procs->schedule();
         break;
 
