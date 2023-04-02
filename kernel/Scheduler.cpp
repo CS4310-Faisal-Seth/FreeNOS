@@ -70,7 +70,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
            if (p == proc)
               foundProc = proc;
        }
-    } else if (oldPriority) == 2) {
+    } else if (oldPriority == 2) {
        Size count = m_queue2.count();
 
        // Traverse the Queue to remove the Process
@@ -119,7 +119,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
      }
 
      // Proc has its new priority, so enqueue will add appropriately
-     return this->enqueue(proc);
+     return this->enqueue(proc, true);
 }
 
 Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
