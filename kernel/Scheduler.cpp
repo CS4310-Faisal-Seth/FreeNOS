@@ -68,7 +68,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
         {
           Process *p = m_queue1.pop();
            if (p == proc)
-              foundProc = proc;
+              foundProc = p;
        }
     } else if (oldPriority == 2) {
        Size count = m_queue2.count();
@@ -78,7 +78,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
        {
           Process *p = m_queue2.pop();
           if (p == proc)
-             foundProc = proc;
+             foundProc = p;
        };
     } else if (oldPriority == 3) {
         Size count = m_queue3.count();
@@ -88,7 +88,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
        {
           Process *p = m_queue3.pop();
           if (p == proc)
-             foundProc = proc;
+             foundProc = p;
        };
     } else if (oldPriority == 4) {
        Size count = m_queue4.count();
@@ -98,7 +98,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
        {
           Process *p = m_queue4.pop();
           if (p == proc)
-              foundProc = proc;
+              foundProc = p;
        };
     } else if (oldPriority == 5) {
        Size count = m_queue5.count();
@@ -108,7 +108,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
        {
           Process *p = m_queue5.pop();
           if (p == proc)
-             foundProc = proc;
+             foundProc = p;
         };
      }
 
