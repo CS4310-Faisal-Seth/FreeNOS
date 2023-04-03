@@ -134,20 +134,8 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
      }
 
      // Proc has its new priority, so enqueue will add appropriately
-     if (proc->getPriority() == 1) {
-         m_queue1.push(proc);
-     } else if (proc->getPriority() == 2) {
-         m_queue2.push(proc);
-     } else if (proc->getPriority() == 3) {
-         m_queue3.push(proc);
-     } else if (proc->getPriority() == 4) {
-         m_queue4.push(proc);
-     } else if (proc->getPriority() == 5) {
-         m_queue5.push(proc);
-     } else {
-         ERROR("process ID " << proc->getID() << " has invalid priority level");
-         return InvalidArgument;
-     }
+     // This can fail if we try to enqueue a proc that is not in the ready state
+     enqueue(proc, false);
 
      return Success;
 }
