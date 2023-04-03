@@ -96,11 +96,13 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
        for (Size i = 0; i < count; i++)
        {
           Process *p = m_queue3.pop();
-          if (p == proc)
+          if (p == proc) {
             ERROR("Removing process ID " << proc->getID() << "from prio 3 queue");
             foundProc = p;
-          else
+         }
+          else {
              m_queue3.push(p);
+          }
        };
     } else if (oldPriority == 4) {
        Size count = m_queue4.count();
