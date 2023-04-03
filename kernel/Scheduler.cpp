@@ -17,7 +17,7 @@
 
 #include <Log.h>
 #include <stdio.h>
-
+#include <unistd.h>
 #include "Kernel.h"
 #include "Scheduler.h"
 
@@ -46,7 +46,11 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
     } else if (proc->getPriority() == 3) {
         m_queue3.push(proc);
     } else if (proc->getPriority() == 4) {
-        printf("Queing to queue 4");
+
+        String out;
+        out << "ID  Priority  PARENT  USER GROUP STATUS     CMD\r\n";
+        write(1, *out, out.length());
+
         m_queue4.push(proc);
     } else if (proc->getPriority() == 5) {
         m_queue5.push(proc);
@@ -197,7 +201,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 
             if (p == proc)
             {
-                printf("Dequeing from queue 3");
+                //printf("Dequeing from queue 3");
                 //ERROR("The process was found and will be removed from queue 3");
                 return Success;
             }
@@ -258,7 +262,7 @@ Process * Scheduler::select()
     {
         Process *p = m_queue4.pop();
         m_queue4.push(p);
-        printf("Selecting from queue 4");
+        //printf("Selecting from queue 4");
         //ERROR("process ID " << p->getID() << " selected from prio queue 4");
 
         return p;
