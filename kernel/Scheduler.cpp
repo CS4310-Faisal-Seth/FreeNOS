@@ -16,8 +16,6 @@
  */
 
 #include <Log.h>
-#include <stdio.h>
-#include <unistd.h>
 #include "Kernel.h"
 #include "Scheduler.h"
 
@@ -47,9 +45,7 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
         m_queue3.push(proc);
     } else if (proc->getPriority() == 4) {
 
-        String out;
-        out << "ID  Priority  PARENT  USER GROUP STATUS     CMD\r\n";
-        write(1, *out, out.length());
+        DEBUG("Fuck you");
 
         m_queue4.push(proc);
     } else if (proc->getPriority() == 5) {
