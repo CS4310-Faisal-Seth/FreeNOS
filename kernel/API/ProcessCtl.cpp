@@ -77,6 +77,7 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         return (API::Result) procs->current()->getParent();
 
     case Schedule:
+        ERROR("Scheduling from schedule Process Handler: " << proc->getID());
         procs->schedule();
         break;
 
