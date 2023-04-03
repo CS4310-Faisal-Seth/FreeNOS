@@ -16,6 +16,7 @@
  */
 
 #include <Log.h>
+#include <sctdio>
 #include "Kernel.h"
 #include "Scheduler.h"
 
