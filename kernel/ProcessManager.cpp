@@ -174,6 +174,7 @@ ProcessManager::Result ProcessManager::schedule()
 
     // If no process ready, let us idle
     if (!proc)
+        ERROR("no process is ready so we shall idle!!");
         proc = m_idle;
 
     if (!proc)

@@ -97,7 +97,6 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
        {
           Process *p = m_queue3.pop();
           if (p == proc) {
-            ERROR("Removing process ID " << proc->getID() << "from prio 3 queue");
             foundProc = p;
          }
           else {
