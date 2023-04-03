@@ -66,12 +66,15 @@ Renice::Result Renice::exec()
 
     //ProcessID procID = PID;
 
-    const ProcessClient process;
+    //const ProcessClient process;
 
     ProcessClient::Info info;
 
     const API::Result result = ProcessCtl(PID, ChangePriority, (Address) &info.kernelState, newpriority);
-
+    if (result != ProcessCtl::Success)
+    {
+        ERROR("Something went wrong");
+    }
 /*
     Kernel k = Kernel::instance();
 

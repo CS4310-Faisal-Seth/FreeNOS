@@ -194,8 +194,10 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
             Process *p = m_queue3.pop();
 
             if (p == proc)
+            {
                 ERROR("The process was found and will be removed from queue 3");
                 return Success;
+            }
             else
                 m_queue3.push(p);
         }
