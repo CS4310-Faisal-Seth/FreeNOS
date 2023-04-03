@@ -157,9 +157,7 @@ API::Result ProcessCtlHandler(const ProcessID procID,
 
         procs->syncQueues(proc, oldPriority);
 
-        if (proc->getState() == Process::Ready) {
-            procs->schedule();
-        }
+        procs->schedule();
         break;
 
     case WaitPID:
