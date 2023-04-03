@@ -71,15 +71,6 @@ Renice::Result Renice::exec()
     ProcessClient::Info info;
 
     const API::Result result = ProcessCtl(PID, ChangePriority, (Address) &info.kernelState, newpriority);
-    switch (result)
-        {
-            case API::Success:
-                break;
-            case API::NotFound:
-                ERROR("Bad");
-            default:
-                ERROR("Bad");
-        }
 /*
     Kernel k = Kernel::instance();
 
