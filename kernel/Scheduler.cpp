@@ -97,7 +97,8 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
        {
           Process *p = m_queue3.pop();
           if (p == proc)
-             foundProc = p;
+            ERROR("Removing process ID " << proc->getID() << "from prio 3 queue");
+            foundProc = p;
           else
              m_queue3.push(p);
        };
@@ -135,10 +136,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
 
      // Proc has its new priority, so enqueue will add appropriately
      // This can fail if we try to enqueue a proc that is not in the ready state
-     Result enqueueResult = enqueue(proc, false);
-     if (enqueueResult == Scheduler::InvalidArgument) {
-        ERROR("This is not an error - just means it can't be scheduled yet!");
-     }
+     enqueue(proc, false);
 
      return Success;
 }
