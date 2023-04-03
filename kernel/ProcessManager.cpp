@@ -182,7 +182,7 @@ ProcessManager::Result ProcessManager::schedule()
     }
 
     // Try to wakeup processes that are waiting for a timer to expire
-    ERROR("Sleep timer count for process" << proc->getID << " is " << sleepTimerCount);
+    DEBUG("Sleep timer count for process" << proc->getID << " is " << sleepTimerCount);
     for (Size i = 0; i < sleepTimerCount; i++)
     {
         Process *p = m_sleepTimerQueue.pop();
