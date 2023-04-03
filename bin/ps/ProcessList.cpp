@@ -36,6 +36,7 @@ ProcessList::ProcessList(int argc, char **argv)
 
 ProcessList::Result ProcessList::exec()
 {
+    DEBUG("Fuck you");
     const ProcessClient process;
     String out;
 

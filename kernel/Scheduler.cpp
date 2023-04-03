@@ -156,6 +156,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
     }
 
     int currentProcId = proc->getPriority();
+    int ProcId = proc->getID();
 
     if (currentProcId == 1) {
         Size count = m_queue1.count();
@@ -195,7 +196,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
         {
             Process *p = m_queue3.pop();
 
-            if (p == proc)
+            if (p->getID() == ProcId)
             {
                 //printf("Dequeing from queue 3");
                 //ERROR("The process was found and will be removed from queue 3");
