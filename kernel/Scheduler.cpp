@@ -248,7 +248,7 @@ Process * Scheduler::select()
     else if (m_queue4.count() > 0)
     {
         Process *p = m_queue4.pop();
-        m_queue4.push(p);
+       // m_queue4.push(p);
         ERROR("process ID " << p->getID() << " selected from prio queue 4");
 
         return p;
