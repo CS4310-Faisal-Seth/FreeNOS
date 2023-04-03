@@ -152,9 +152,9 @@ void ProcessManager::remove(Process *proc, const uint exitStatus)
     delete proc;
 }
 
-ProcessManager::Result ProcessManager::syncQueues(Process *proc, int oldPriority) {
+ProcessManager::Result ProcessManager::syncQueues(Process *proc, int newPriority) {
 
-   Scheduler::Result res =  m_scheduler->syncQueues(proc, oldPriority);
+   Scheduler::Result res =  m_scheduler->syncQueues(proc, newPriority);
    if (res == Scheduler::InvalidArgument) {
         FATAL("failed to sync queues after changing proc priority");
         return ProcessManager::InvalidArgument;
@@ -182,7 +182,6 @@ ProcessManager::Result ProcessManager::schedule()
     }
 
     // Try to wakeup processes that are waiting for a timer to expire
-    DEBUG("Sleep timer count for process" << proc->getID << " is " << sleepTimerCount);
     for (Size i = 0; i < sleepTimerCount; i++)
     {
         Process *p = m_sleepTimerQueue.pop();

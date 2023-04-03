@@ -80,7 +80,7 @@ class Scheduler
      */
     Result dequeue(Process *proc, bool ignoreState);
 
-    Result syncQueues(Process *proc, int oldPriority);
+    Result syncQueues(Process *proc, int newPriority);
 
     /**
      * Select the next process to run.

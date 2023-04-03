@@ -56,88 +56,90 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
 }
 
 // At this point, assume proc has new priority
-Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
+Scheduler::Result Scheduler::syncQueues(Process *proc, int newPriority) {
 
-    Process *foundProc;
+//    Process *foundProc;
+//
+//     // At this point, old priority should be set
+//     if (oldPriority == 0) {
+//        return InvalidArgument;
+//     }
+//
+//    if (oldPriority == 1) {
+//       Size count = m_queue1.count();
+//
+//       // Traverse the Queue to remove the Process
+//       for (Size i = 0; i < count; i++)
+//        {
+//          Process *p = m_queue1.pop();
+//           if (p == proc)
+//              foundProc = p;
+//           else
+//              m_queue1.push(p);
+//       }
+//    } else if (oldPriority == 2) {
+//       Size count = m_queue2.count();
+//
+//       // Traverse the Queue to remove the Process
+//       for (Size i = 0; i < count; i++)
+//       {
+//          Process *p = m_queue2.pop();
+//          if (p == proc)
+//             foundProc = p;
+//          else
+//             m_queue2.push(p);
+//       };
+//    } else if (oldPriority == 3) {
+//        Size count = m_queue3.count();
+//
+//        // Traverse the Queue to remove the Process
+//       for (Size i = 0; i < count; i++)
+//       {
+//          Process *p = m_queue3.pop();
+//          if (p == proc) {
+//            foundProc = p;
+//         }
+//          else {
+//             m_queue3.push(p);
+//          }
+//       };
+//    } else if (oldPriority == 4) {
+//       Size count = m_queue4.count();
+//
+//       // Traverse the Queue to remove the Process
+//       for (Size i = 0; i < count; i++)
+//       {
+//          Process *p = m_queue4.pop();
+//          if (p == proc)
+//              foundProc = p;
+//          else
+//             m_queue4.push(p);
+//       };
+//    } else if (oldPriority == 5) {
+//       Size count = m_queue5.count();
+//
+//       // Traverse the Queue to remove the Process
+//       for (Size i = 0; i < count; i++)
+//       {
+//          Process *p = m_queue5.pop();
+//          if (p == proc)
+//             foundProc = p;
+//          else
+//             m_queue5.push(p);
+//        };
+//     }
+//
+//     // At this point, foundProc should be found
+//     if (!foundProc) {
+//        ERROR("process ID " << proc->getID() << " not found, old prio: " << oldPriority);
+//        return InvalidArgument;
+//     }
 
-     // At this point, old priority should be set
-     if (oldPriority == 0) {
-        return InvalidArgument;
-     }
+     Process *savedProc = proc;
 
-    if (oldPriority == 1) {
-       Size count = m_queue1.count();
-
-       // Traverse the Queue to remove the Process
-       for (Size i = 0; i < count; i++)
-        {
-          Process *p = m_queue1.pop();
-           if (p == proc)
-              foundProc = p;
-           else
-              m_queue1.push(p);
-       }
-    } else if (oldPriority == 2) {
-       Size count = m_queue2.count();
-
-       // Traverse the Queue to remove the Process
-       for (Size i = 0; i < count; i++)
-       {
-          Process *p = m_queue2.pop();
-          if (p == proc)
-             foundProc = p;
-          else
-             m_queue2.push(p);
-       };
-    } else if (oldPriority == 3) {
-        Size count = m_queue3.count();
-
-        // Traverse the Queue to remove the Process
-       for (Size i = 0; i < count; i++)
-       {
-          Process *p = m_queue3.pop();
-          if (p == proc) {
-            foundProc = p;
-         }
-          else {
-             m_queue3.push(p);
-          }
-       };
-    } else if (oldPriority == 4) {
-       Size count = m_queue4.count();
-
-       // Traverse the Queue to remove the Process
-       for (Size i = 0; i < count; i++)
-       {
-          Process *p = m_queue4.pop();
-          if (p == proc)
-              foundProc = p;
-          else
-             m_queue4.push(p);
-       };
-    } else if (oldPriority == 5) {
-       Size count = m_queue5.count();
-
-       // Traverse the Queue to remove the Process
-       for (Size i = 0; i < count; i++)
-       {
-          Process *p = m_queue5.pop();
-          if (p == proc)
-             foundProc = p;
-          else
-             m_queue5.push(p);
-        };
-     }
-
-     // At this point, foundProc should be found
-     if (!foundProc) {
-        ERROR("process ID " << proc->getID() << " not found, old prio: " << oldPriority);
-        return InvalidArgument;
-     }
-
-     // Proc has its new priority, so enqueue will add appropriately
-     // This can fail if we try to enqueue a proc that is not in the ready state
-     enqueue(proc, false);
+     dequeue(proc, true);
+     savedProc->setPriority(newPriority);
+     enqueue(proc, true);
 
      return Success;
 }

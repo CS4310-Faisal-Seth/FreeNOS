@@ -209,7 +209,7 @@ class ProcessManager
      */
     Process * current();
 
-    Result syncQueues(Process *proc, int oldPriority);
+    Result syncQueues(Process *proc, int newPriority);
 
   private:
 
