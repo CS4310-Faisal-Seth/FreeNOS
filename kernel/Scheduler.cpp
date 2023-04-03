@@ -140,7 +140,7 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int newPriority) {
 
      Process *savedProc = proc;
 
-     dequeue(proc, true);
+     //dequeue(proc, true);
      savedProc->setPriority(newPriority);
      enqueue(savedProc, true);
 
