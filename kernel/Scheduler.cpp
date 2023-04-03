@@ -44,7 +44,6 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
     } else if (proc->getPriority() == 3) {
         m_queue3.push(proc);
     } else if (proc->getPriority() == 4) {
-        ERROR("Pushing process " << proc->getID() << " to priority 4 queue");
         m_queue4.push(proc);
     } else if (proc->getPriority() == 5) {
         m_queue5.push(proc);
@@ -136,7 +135,10 @@ Scheduler::Result Scheduler::syncQueues(Process *proc, int oldPriority) {
 
      // Proc has its new priority, so enqueue will add appropriately
      // This can fail if we try to enqueue a proc that is not in the ready state
-     enqueue(proc, false);
+     Result enqueueResult = enqueue(proc, false);
+     if (enqueueResult == Scheduler::InvalidArgument) {
+        ERROR("This is not an error - just means it can't be scheduled yet!");
+     }
 
      return Success;
 }
