@@ -266,7 +266,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 Process * Scheduler::select()
 {
 
-    for(int i = 4; i >= 4; i--){
+    for(int i = 4; i >= 0; i--){
 
         if (m_queues[i].count() > 0)
             {
