@@ -160,7 +160,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 
     int currentProcId = proc->getPriority();
     int ProcId = proc->getID();
-    m_queues[(proc->getPriority())-1].push(proc);
+    //m_queues[(proc->getPriority())-1].push(proc);
 
     Size count = m_queues[currentProcId-1].count();
 
