@@ -42,96 +42,39 @@ Renice::Renice(int argc, char **argv)
 {
     parser().setDescription("Output system process list");
 
+    parser().registerFlag('n', "CHANGE_PRIORITY", "Indicates changing the priority of a process");
     parser().registerPositional("PRIORITY", "priority we want to set to");
     parser().registerPositional("PID", "process we want to change");
 }
 
 Renice::Result Renice::exec()
 {
-     //const ProcessClient process;
-    //All of this is getting changed
-    int PID = 0;
-    int newpriority = 0;
+    //Only checks for -n
+    const char *priority = arguments().get("CHANGE_PRIORITY");
+    if (priority != NULL){
 
-    PID = atoi(arguments().get("PID"));
-    newpriority = atoi(arguments().get("PRIORITY"));
+        //Pass in the arguments from command line
+        int PID = 0;
+        int newpriority = 0;
 
-    //input validation
-    if(newpriority < 1 || newpriority > 5){
-        ERROR("invalid priority `" << arguments().get("PRIORITY") << "'");
-        return InvalidArgument;
+        PID = atoi(arguments().get("PID"));
+        newpriority = atoi(arguments().get("PRIORITY"));
+
+        //input validation
+        if(newpriority < 1 || newpriority > 5){
+            ERROR("invalid priority `" << arguments().get("PRIORITY") << "'");
+            return InvalidArgument;
+        }
+
+        ProcessClient::Info info;
+
+        //Calls the function in processCtl using the output to pass in the newpriority
+        const API::Result result = ProcessCtl(PID, ChangePriority, (Address) &info.kernelState, newpriority);
+
+        return Success;
     }
 
-    //Make sure that the process exisits
-
-    //ProcessID procID = PID;
-
-    //const ProcessClient process;
-
-    ProcessClient::Info info;
-
-    const API::Result result = ProcessCtl(PID, ChangePriority, (Address) &info.kernelState, newpriority);
-/*
-    Kernel k = Kernel::instance();
-
-    // Does the target process exist?
-    const Arch::MemoryMap map;
-    Process *proc = ZERO;
-    //ProcessInfo *info = (ProcessInfo *) addr;
-    ProcessManager *procs = Kernel::instance()->getProcessManager();
-    //Timer *timer;
-
-    if (procID == SELF)
-        proc = procs->current();    //current process
-    else if (!(proc = procs->get(procID))){
-        ERROR("Couldnt find process");
-        return InvalidArgument;
-    }
-
-    else    {
-        proc = procs->get(procID);
-    }
-
-    proc->setPriority(newpriority);
-
-*/
-    //Call the process's setPriority(newpriority)
-
-
-
-    //now the actual implementation
-
-     //He says we should follow how ps is structured
-
-     //ps code below
-        /*
-            const ProcessClient process;
-
-            // Loop processes
-                                            //Using process client to find the number of processes
-            for (ProcessID pid = 0; pid < ProcessClient::MaximumProcesses; pid++)
-            {
-                ProcessClient::Info info;
-                                                        //process is a process client
-                const ProcessClient::Result result = process.processInfo(pid, info);
-                if (result == ProcessClient::Success)
-                {
-                    //info is a struct in process client
-                    //prints stuff from info and info.kernelstate
-                }
-            }
-        */
-
-    /*process.processInfo makes sure that the process exisits then runs process CTL on it
-        it uses this ProcessCtl(pid, InfoPID, (Address) &info.kernelState);, but process CTL takes in
-          ProcessCtlHandler(const ProcessID procID, const ProcessOperation action, const Address addr, const Address output)
-        I think addr and output are initialized as 0 through a weird code loop?
-    processctl then does a bunch of stuff I dont understand, but is able to call the processes functions.
-        I think we have two options
-            1. Figure out how process ctl works to bypass going through all these classes and access the process
-            2. call process ctl and add an increment and decrement action to ctl, then loop that by the difference between the new priority and current priority
-
-    */
-
+    //returns success if not -n argument
     return Success;
+
 }
