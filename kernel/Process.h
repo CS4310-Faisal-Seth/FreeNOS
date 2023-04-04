@@ -259,7 +259,7 @@ class Process
     const ProcessID m_id;
 
     /** Process priority */
-    ProcessID m_priority;
+    u8 m_priority;
 
     /** Parent process */
     ProcessID m_parent;

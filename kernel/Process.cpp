@@ -67,7 +67,8 @@ ProcessID Process::getID() const
 
 int Process::getPriority() const
 {
-    return m_priority;
+    return static_cast<int>(m_priority);
+    //return m_priority;
 }
 
 void Process::increasePriority(){
@@ -75,7 +76,8 @@ void Process::increasePriority(){
 }
 
 void Process::setPriority(int newPriority) {
-    m_priority = newPriority;
+    m_priority = static_cast<u8>(newPriority);
+    //m_priority = newPriority;
 }
 
 ProcessID Process::getParent() const
