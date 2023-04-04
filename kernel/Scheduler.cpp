@@ -36,8 +36,8 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
         ERROR("process ID " << proc->getID() << " not in Ready state");
         return InvalidArgument;
     }
-
-    if (proc->getPriority() == 1) {
+    m_queues[(proc->getPriority())-1].push(proc);
+    /*if (proc->getPriority() == 1) {
         m_queue1.push(proc);
     } else if (proc->getPriority() == 2) {
         m_queue2.push(proc);
@@ -45,7 +45,6 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
         m_queue3.push(proc);
     } else if (proc->getPriority() == 4) {
 
-        DEBUG("Fuck you");
 
         m_queue4.push(proc);
     } else if (proc->getPriority() == 5) {
@@ -53,7 +52,7 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
     } else {
         ERROR("process ID " << proc->getID() << " has invalid priority level");
             return InvalidArgument;
-    }
+    }*/
 
     return Success;
 }
@@ -161,7 +160,22 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 
     int currentProcId = proc->getPriority();
     int ProcId = proc->getID();
+    m_queues[(proc->getPriority())-1].push(proc);
 
+    Size count = m_queues[currentProcId-1].count();
+
+    // Traverse the Queue to remove the Process
+    for (Size i = 0; i < count; i++)
+    {
+        Process *p = m_queues[currentProcId-1].pop();
+
+        if (p == proc)
+            return Success;
+        else
+            m_queues[currentProcId-1].push(p);
+    }
+
+    /*
     if (currentProcId == 1) {
         Size count = m_queue1.count();
 
@@ -242,7 +256,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
                 m_queue5.push(p);
         }
 
-    }
+    }*/
 
     FATAL("process ID " << proc->getID() << " is not in the schedule, currentProcId " << currentProcId);
     return InvalidArgument;
@@ -251,6 +265,19 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 //Major part to the second part
 Process * Scheduler::select()
 {
+
+    for(int i = 4; i >= 4; i--){
+
+        if (m_queues[i].count() > 0)
+            {
+                Process *p = m_queues[i].pop();
+                m_queues[i].push(p);
+
+                return p;
+            }
+
+    }
+    /*
     if (m_queue5.count() > 0)
     {
         Process *p = m_queue5.pop();
@@ -291,7 +318,7 @@ Process * Scheduler::select()
         m_queue1.push(p);
 
         return p;
-    }
+    }*/
 
     return (Process *) NULL;
 }
