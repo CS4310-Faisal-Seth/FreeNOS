@@ -16,6 +16,9 @@ Faisal Syed: Synchronization of Queues after Renice Command, Debugging Schedulin
 
 https://youtu.be/HWcG8j7JQ0Y
 
+Main Challenge:
+  - Familiarizing ourselves with the organization of a large dense exisiting program and how the different classes interact and respond to function calls
+
 About {#mainpage}
 =====
 
