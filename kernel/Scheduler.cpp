@@ -24,11 +24,6 @@ Scheduler::Scheduler()
     DEBUG("");
 }
 
-//Size Scheduler::count() const
-//{
-//    return m_queue.count();
-//}
-
 Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
 {
     if (proc->getState() != Process::Ready && !ignoreState)
@@ -37,105 +32,12 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
         return InvalidArgument;
     }
     m_queues[(proc->getPriority())-1].push(proc);
-    /*if (proc->getPriority() == 1) {
-        m_queue1.push(proc);
-    } else if (proc->getPriority() == 2) {
-        m_queue2.push(proc);
-    } else if (proc->getPriority() == 3) {
-        m_queue3.push(proc);
-    } else if (proc->getPriority() == 4) {
-
-
-        m_queue4.push(proc);
-    } else if (proc->getPriority() == 5) {
-        m_queue5.push(proc);
-    } else {
-        ERROR("process ID " << proc->getID() << " has invalid priority level");
-            return InvalidArgument;
-    }*/
 
     return Success;
 }
 
-// At this point, assume proc has new priority
+//When changing priority we remove it from the old queue (if it was ready) change the priority then enqueue it to the new queue
 Scheduler::Result Scheduler::syncQueues(Process *proc, int newPriority) {
-
-//    Process *foundProc;
-//
-//     // At this point, old priority should be set
-//     if (oldPriority == 0) {
-//        return InvalidArgument;
-//     }
-//
-//    if (oldPriority == 1) {
-//       Size count = m_queue1.count();
-//
-//       // Traverse the Queue to remove the Process
-//       for (Size i = 0; i < count; i++)
-//        {
-//          Process *p = m_queue1.pop();
-//           if (p == proc)
-//              foundProc = p;
-//           else
-//              m_queue1.push(p);
-//       }
-//    } else if (oldPriority == 2) {
-//       Size count = m_queue2.count();
-//
-//       // Traverse the Queue to remove the Process
-//       for (Size i = 0; i < count; i++)
-//       {
-//          Process *p = m_queue2.pop();
-//          if (p == proc)
-//             foundProc = p;
-//          else
-//             m_queue2.push(p);
-//       };
-//    } else if (oldPriority == 3) {
-//        Size count = m_queue3.count();
-//
-//        // Traverse the Queue to remove the Process
-//       for (Size i = 0; i < count; i++)
-//       {
-//          Process *p = m_queue3.pop();
-//          if (p == proc) {
-//            foundProc = p;
-//         }
-//          else {
-//             m_queue3.push(p);
-//          }
-//       };
-//    } else if (oldPriority == 4) {
-//       Size count = m_queue4.count();
-//
-//       // Traverse the Queue to remove the Process
-//       for (Size i = 0; i < count; i++)
-//       {
-//          Process *p = m_queue4.pop();
-//          if (p == proc)
-//              foundProc = p;
-//          else
-//             m_queue4.push(p);
-//       };
-//    } else if (oldPriority == 5) {
-//       Size count = m_queue5.count();
-//
-//       // Traverse the Queue to remove the Process
-//       for (Size i = 0; i < count; i++)
-//       {
-//          Process *p = m_queue5.pop();
-//          if (p == proc)
-//             foundProc = p;
-//          else
-//             m_queue5.push(p);
-//        };
-//     }
-//
-//     // At this point, foundProc should be found
-//     if (!foundProc) {
-//        ERROR("process ID " << proc->getID() << " not found, old prio: " << oldPriority);
-//        return InvalidArgument;
-//     }
 
      Process *savedProc = proc;
     if(proc->getState() == Process::Ready) {
@@ -160,7 +62,6 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 
     int currentProcId = proc->getPriority();
     int ProcId = proc->getID();
-    //m_queues[(proc->getPriority())-1].push(proc);
 
     Size count = m_queues[currentProcId-1].count();
 
@@ -175,94 +76,11 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
             m_queues[currentProcId-1].push(p);
     }
 
-    /*
-    if (currentProcId == 1) {
-        Size count = m_queue1.count();
-
-        // Traverse the Queue to remove the Process
-        for (Size i = 0; i < count; i++)
-        {
-            Process *p = m_queue1.pop();
-
-            if (p == proc)
-                return Success;
-            else
-                m_queue1.push(p);
-        }
-    }
-
-    else if (currentProcId == 2) {
-        Size count = m_queue2.count();
-
-        // Traverse the Queue to remove the Process
-        for (Size i = 0; i < count; i++)
-        {
-            Process *p = m_queue2.pop();
-
-            if (p == proc)
-                return Success;
-            else
-                m_queue2.push(p);
-        }
-    }
-
-    else if (currentProcId == 3) {
-        Size count = m_queue3.count();
-
-        // Traverse the Queue to remove the Process
-        for (Size i = 0; i < count; i++)
-        {
-            Process *p = m_queue3.pop();
-
-            if (p->getID() == ProcId)
-            {
-                //printf("Dequeing from queue 3");
-                //ERROR("The process was found and will be removed from queue 3");
-                return Success;
-            }
-            else
-                m_queue3.push(p);
-        }
-
-    }
-
-    else if (currentProcId == 4) {
-        Size count = m_queue4.count();
-
-        // Traverse the Queue to remove the Process
-        for (Size i = 0; i < count; i++)
-        {
-            Process *p = m_queue4.pop();
-
-            if (p == proc)
-                return Success;
-            else
-                m_queue4.push(p);
-        }
-
-    }
-
-    else if (currentProcId == 5) {
-        Size count = m_queue5.count();
-
-        // Traverse the Queue to remove the Process
-        for (Size i = 0; i < count; i++)
-        {
-            Process *p = m_queue5.pop();
-
-            if (p == proc)
-                return Success;
-            else
-                m_queue5.push(p);
-        }
-
-    }*/
-
     FATAL("process ID " << proc->getID() << " is not in the schedule, currentProcId " << currentProcId);
     return InvalidArgument;
 }
 
-//Major part to the second part
+//Currently the Scheduler will just select the highest priority to run
 Process * Scheduler::select()
 {
 
@@ -277,48 +95,6 @@ Process * Scheduler::select()
             }
 
     }
-    /*
-    if (m_queue5.count() > 0)
-    {
-        Process *p = m_queue5.pop();
-        m_queue5.push(p);
-
-        return p;
-    }
-
-    else if (m_queue4.count() > 0)
-    {
-        Process *p = m_queue4.pop();
-        m_queue4.push(p);
-        //printf("Selecting from queue 4");
-        //ERROR("process ID " << p->getID() << " selected from prio queue 4");
-
-        return p;
-    }
-
-    else if (m_queue3.count() > 0)
-    {
-        Process *p = m_queue3.pop();
-        m_queue3.push(p);
-
-        return p;
-    }
-
-    else if (m_queue2.count() > 0)
-    {
-        Process *p = m_queue2.pop();
-        m_queue2.push(p);
-
-        return p;
-    }
-
-    else if (m_queue1.count() > 0)
-    {
-        Process *p = m_queue1.pop();
-        m_queue1.push(p);
-
-        return p;
-    }*/
 
     return (Process *) NULL;
 }

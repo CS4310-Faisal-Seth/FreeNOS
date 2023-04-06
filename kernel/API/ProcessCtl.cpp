@@ -146,10 +146,6 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         info->priority = proc->getPriority();
         break;
 
-    case IncreasePriority:
-        proc->increasePriority();
-        break;
-
     case ChangePriority:
        // oldPriority = proc->getPriority();
 
@@ -219,7 +215,6 @@ Log & operator << (Log &log, ProcessOperation op)
         case EnableIRQ: log.append("EnableIRQ"); break;
         case DisableIRQ:log.append("DisableIRQ"); break;
         case InfoPID:   log.append("InfoPID"); break;
-        case IncreasePriority:    log.append("IncreasePriority"); break;
         case ChangePriority:    log.append("ChangePriority"); break;
         case WaitPID:   log.append("WaitPID"); break;
         case InfoTimer: log.append("InfoTimer"); break;

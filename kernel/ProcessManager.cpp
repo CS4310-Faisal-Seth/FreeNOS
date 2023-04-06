@@ -152,6 +152,7 @@ void ProcessManager::remove(Process *proc, const uint exitStatus)
     delete proc;
 }
 
+//When changing priorities it needs to be moved from one queue to another
 ProcessManager::Result ProcessManager::syncQueues(Process *proc, int newPriority) {
 
    Scheduler::Result res =  m_scheduler->syncQueues(proc, newPriority);
@@ -163,7 +164,7 @@ ProcessManager::Result ProcessManager::syncQueues(Process *proc, int newPriority
    }
 }
 
-//scheduling shit
+
 ProcessManager::Result ProcessManager::schedule()
 {
     const Timer *timer = Kernel::instance()->getTimer();
