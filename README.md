@@ -1,3 +1,21 @@
+Faisal + Seth README
+=====
+
+*Names And Contributions*
+
+Seth Laske: Created Renice Command, Printing + Formatting Processes w/ Priority, and refactoring to array of queues
+Faisal Syed: Synchronization of Queues after Renice Command, Debugging Scheduling issues
+
+*Features*
+
+- New "Renice" Command
+- Printing with `ps -l` to list processes with priority levels
+- New scheduling post-renice commannd 
+
+*Link to Screencast Video*
+
+https://youtu.be/HWcG8j7JQ0Y
+
 About {#mainpage}
 =====
 
